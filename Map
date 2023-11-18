@@ -41,3 +41,25 @@ public class ClassA
 		
 	}
 }
+
+// Class B:
+import java.util.Scanner;
+
+public class ClassB 
+{ 
+	static Scanner sc = new Scanner(System.in);	
+	void Students()
+	{
+		
+		
+		new ClassA().meth1();
+	}
+	public static void main(String[] args) 
+	{
+	  System.out.println("Students Result Portal");
+	  new ClassB().Students();
+		
+	}
+
+}
+                  
