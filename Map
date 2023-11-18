@@ -1,0 +1,43 @@
+hell
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class ClassA 
+{
+	static Scanner sc = new Scanner(System.in);
+	void meth1()
+	{
+		
+		HashMap<Object,Object> map =new HashMap<Object,Object>();
+		map.put("20X31A6611", "TYLER - CGPA:8.09");
+		map.put("20X31A6607","MARLA  - CGPA:9.19");
+		map.put("20X31A6602","BOB - CGPA:8.32");
+		map.put("20X31A6601", "OTIS - CGPA:8.56");
+		map.put("20X31A6625","MAEVE	 - CGPA:8.51");
+		map.put("20X31A6619", "ADAM - CGPA:9.00");
+		
+		
+		
+		
+		System.out.println("Please Enter Your Roll Number");
+		boolean isPresent = false;
+		while(!isPresent)
+		{
+		Object input = sc.next();
+		if(map.containsKey(input))
+		{
+			System.out.println("Result: "+map.get(input));
+			isPresent = false;
+		}
+		else
+		{
+			System.out.println("Roll Number Not Found In Database");
+		}
+		}	
+	}
+	public static void main(String[] args) 
+	{
+		new ClassA().meth1();
+		
+	}
+}
