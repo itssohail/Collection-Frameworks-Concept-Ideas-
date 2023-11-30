@@ -1,0 +1,152 @@
+	import java.time.LocalDateTime;
+	import java.time.LocalTime;
+	import java.util.ArrayList;
+	import java.util.Scanner;
+
+	public class ClassA {
+	    static String userName;
+	    static ArrayList<Object> books = new ArrayList<>();
+
+	    void admin() {
+	        System.out.println("---------Library management system--------------");
+	        books.add("Harry Potter");
+	        books.add("The God Father");
+	        books.add("IKIGAI");
+	        books.add("Steve Jobs");
+	        books.add("The Chronicles of Narnia");
+	        books.add("The subtle art of not giving a F***!");
+	        books.add("In Custody");
+	        books.add("Panchathantram");
+	        books.add("2 States");
+	        books.add("Half Girlfriend\n\n");
+	    }
+
+	    void user() {
+	        Scanner sc = new Scanner(System.in);
+	        System.out.println("Hello, Welcome to the library");
+	        System.out.println("1) Borrow a Book");
+	        System.out.println("2) Return a Book");
+
+	        boolean isValid = false;
+
+	        while (!isValid) {
+	            String input = sc.next();
+	            switch (input) {
+	                case "1":
+	                    sc.nextLine(); // Consume the newline character
+	                    System.out.println("-----BOOK BORROWING-------");
+	                    System.out.println("Please Enter Your Name to Proceed");
+	                    userName = sc.nextLine();
+	                    System.out.println("These Are the Available Books In the Library\n\n");
+	                    for (Object book : books) {
+	                        System.out.println(book);
+	                    }
+	                    borrowBook(sc);
+	                    isValid = true;
+	                    break;
+	                case "2":
+	                    System.out.println("-----RETURNING A BOOK----");
+	                    returnBook(sc);
+	                    isValid = true;
+	                    break;
+	                default:
+	                    System.out.println("Invalid Option Entry. Check again.");
+	                    break;
+	            }
+	        }
+	    }
+
+	    void borrowBook(Scanner sc) {
+	        boolean isFalse = false;
+	        boolean bookFound = false;
+
+	        while (!isFalse) {
+	            System.out.println("Enter the name of the book you want to borrow with exact Spaces and Capital Letters");
+	            String bookToBorrow = sc.nextLine().trim();
+
+	            for (Object book : books) {
+	                if (book.toString().trim().equalsIgnoreCase(bookToBorrow)) {
+	                    bookFound = true;
+	                    break;
+	                }
+	            }
+
+	            if (bookFound) {
+	                isFalse = true;
+	                System.out.println();
+	                System.out.println("      Book borrowed Successfully");
+	                System.out.println("      Book Name: " + bookToBorrow);
+	                System.out.println("      Borrower Name: " + userName);
+	                System.out.println("      Borrowing Time: " + LocalDateTime.now());
+	                System.out.println("Please Return the book within the 24hrs from Borrowed Time");
+
+	                // Remove the exact book from the list
+	                books.removeIf(book -> book.toString().trim().equalsIgnoreCase(bookToBorrow));
+	                System.out.println();
+
+	                boolean isContinue = true;
+	                while (isContinue) {
+	                    System.out.println("1) Check Available Books");
+	                    System.out.println("2) Exit");
+	                    String option = sc.next();
+	                    sc.nextLine(); // Consume the newline character
+	                    switch (option) {
+	                        case "1":
+	                            System.out.println("Available Books:");
+	                            for (Object bookObj : books) {
+	                                System.out.println(bookObj);
+	                            }
+	                            isContinue = false;
+	                            break;
+	                        case "2":
+	                            System.out.println("Thank You For Choosing Our Digital Library");
+	                            isContinue = false;
+	                            break;
+	                        default:
+	                            System.out.println("Invalid Option. Please enter 1 or 2.");
+	                            break;
+	                    }
+	                }
+	            } else {
+	                System.out.println("Book not found in the library.");
+	            }
+	        }
+	    }
+
+	    void returnBook(Scanner sc) {
+	        System.out.println("Enter the name of the book you want to return:");
+	        String bookToReturn = sc.nextLine();
+	        books.add(bookToReturn);
+	        System.out.println("Book returned: " + bookToReturn);
+	        System.out.println("Book Returned Time:" + LocalTime.now());
+	        boolean isContinue = true;
+	        while (isContinue) {
+	            System.out.println("1) Check Available Books");
+	            System.out.println("2) Exit");
+	            String option = sc.next();
+	            sc.nextLine(); // Consume the newline character
+	            switch (option) {
+	                case "1":
+	                    System.out.println("Updated Available Books");
+	                    for (Object bookObj : books) {
+	                        System.out.println(bookObj);
+	                    }
+	                    isContinue = false;
+	                    break;
+	                case "2":
+	                    System.out.println("Thank You For Choosing Our Digital Library");
+	                    isContinue = false;
+	                    break;
+	                default:
+	                    System.out.println("Invalid Option. Please enter 1 or 2.");
+	                    break;
+	            }
+	        }
+	    }
+
+	    public static void main(String[] args) {
+	        ClassA library = new ClassA();
+	        library.admin();
+	        library.user();
+	    }
+	}
